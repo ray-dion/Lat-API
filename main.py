@@ -33,7 +33,7 @@ def search_data(id:int):
 
 # nambah data
 '''Ceritanya ingin input data baru dimana data baru merupakan dictionary. Data baru ini ingin ditambahkan ke dictionary yang sudah ada'''
-@app.post('/data/{new_data}')
+@app.post('/data/add')
 
 def add_data(new_data:dict):
     global df
