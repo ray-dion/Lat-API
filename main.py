@@ -33,14 +33,12 @@ def search_data(id:int):
 
 # nambah data
 '''Ceritanya ingin input data baru dimana data baru merupakan dictionary. Data baru ini ingin ditambahkan ke dictionary yang sudah ada'''
-# @app.post('/data/{new_data}')
+@app.post('/data/{new_data}')
 
-# def add_data(new_data:str):
-#     new_data = new_data.split('-')
-#     new_row = {'id':new_data[0],
-#                'nama':new_data[1],
-#                'umur':new_data[2],
-#                'hobi':new_data[3]}
+def add_data(new_data:dict):
+    global df
     
-#     new_row = pd.DataFrame(new_data)
-#     df = pd.concat([df, new_row], ignore_index=True)
+    new_row = pd.DataFrame([new_data])
+    df = pd.concat([df, new_row], ignore_index=True)
+
+    return {'message':df.to_dict(orient='records')}
