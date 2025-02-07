@@ -1,11 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import pandas as pd
+import uvicorn
 
 # Create API object
 app = FastAPI()
 
 # read dat
-df = pd.read_csv('temp.csv')
+df = pd.read_csv('temp (2).csv')
 
 # Root Home API
 @app.get("/")
@@ -22,18 +23,29 @@ def greet(name):
 @app.get("/data")
 
 def get_data():
-    return df.to_dict(orient='records')
+    return df.to_dict()
+
+#Endpoint penghapusan data
+@app.delete("/delete/{row}")
+
+def del_data(row):
+    if row in df.index:
+        df.drop(row)
+        return {'message':f'Data pada row {row} telah dihapus'}
+    else:
+        raise HTTPException(status_code=404, detail="Row tidak ketemu!")
+    
 
 # get data by id
-@app.get('/data/{id}')
+# @app.get('/data/{id}')
 
-def search_data(id:int):
-    result = df[df['id']==id]
-    return {'result':result.to_dict(orient='records')}
+# def search_data(id:int):
+#     result = df[df['id']==id]
+#     return {f'result':result.to_dict(orient='records')}
 
 # nambah data
 '''Ceritanya ingin input data baru dimana data baru merupakan dictionary. Data baru ini ingin ditambahkan ke dictionary yang sudah ada'''
-@app.post('/data/add')
+# @app.post('/data/add')
 
 # def add_data(new_data:dict):
 #     global df
