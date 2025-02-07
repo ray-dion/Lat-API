@@ -5,7 +5,7 @@ import pandas as pd
 app = FastAPI()
 
 # read dat
-df = pd.read_csv('data.csv')
+df = pd.read_csv('temp.csv')
 
 # Root Home API
 @app.get("/")
@@ -35,10 +35,10 @@ def search_data(id:int):
 '''Ceritanya ingin input data baru dimana data baru merupakan dictionary. Data baru ini ingin ditambahkan ke dictionary yang sudah ada'''
 @app.post('/data/add')
 
-def add_data(new_data:dict):
-    global df
+# def add_data(new_data:dict):
+#     global df
     
-    new_row = pd.DataFrame([new_data])
-    df = pd.concat([df, new_row], ignore_index=True)
+#     new_row = pd.DataFrame([new_data])
+#     df = pd.concat([df, new_row], ignore_index=True)
 
-    return {'message':df.to_dict(orient='records')}
+#     return {'message':df.to_dict(orient='records')}
