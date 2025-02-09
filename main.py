@@ -28,7 +28,7 @@ def get_data():
 #Endpoint penghapusan data
 @app.delete("/delete/{row}")
 
-def del_data(row):
+def del_data(row:int):
     if row in df.index:
         df.drop(row, inplace=True)
         return {'message':f'Data pada row {row} telah dihapus'}
