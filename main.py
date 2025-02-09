@@ -30,7 +30,7 @@ def get_data():
 
 def del_data(row):
     if row in df.index:
-        df.drop(row)
+        df.drop(row, inplace=True)
         return {'message':f'Data pada row {row} telah dihapus'}
     else:
         raise HTTPException(status_code=404, detail="Row tidak ketemu!")
